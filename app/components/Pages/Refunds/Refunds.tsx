@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../Home/Header';
 import AppList from './AppList';
 import RefundStats from './RefundStats';
+import { refundData } from '@/constants/RefundData';
 import Refundcard from '../Home/Refundcard';
 
 const Refunds = () => {
@@ -16,9 +17,16 @@ const Refunds = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
         >
-          {Array.from({ length: 18 }).map((_, i) => (
-            <Refundcard key={i} />
-          ))}
+          {refundData.map((item, index) => (
+                    <Refundcard
+                        key={index}
+                        company={item.company}
+                        date={item.date}
+                        pnr={item.pnr}
+                        route={item.route}
+                        amount={item.amount}
+                    />
+                ))}
         </ScrollView>
       </View>
     </View>

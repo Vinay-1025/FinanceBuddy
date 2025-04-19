@@ -3,20 +3,20 @@ import React from 'react';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useRouter } from 'expo-router';
 
-const SPaymentsTop = () => {
+const ExpenseTop = () => {
 
     const router = useRouter();
 
     return (
         <View style={styles.toolsdash}>
-            <TouchableOpacity style={styles.btnupload}><Text style={styles.btnname}>Income</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.btnhistory} onPress={() => router.push('/components/Pages/SPayments/Expense')}><Text style={styles.btnname}>Expense</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.btnupload} onPress={() => router.push('/components/Pages/SPayments/SPayments')}><Text style={styles.btnname}>Income</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.btnhistory}><Text style={styles.btnname}>Expense</Text></TouchableOpacity>
             <TouchableOpacity style={styles.mic}><Text><MaterialIcons name="mic" size={20} color={'#A02121'} /></Text></TouchableOpacity>
         </View>
     )
 }
 
-export default SPaymentsTop
+export default ExpenseTop
 
 const styles = StyleSheet.create({
     toolsdash: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     btnupload: {
-        backgroundColor: '#EE8E46',
+        backgroundColor: '#4E8BC3',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'row',
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         boxShadow: '0 2 4 black'
     },
     btnhistory: {
-        backgroundColor: '#4E8BC3',
+        backgroundColor: '#EE8E46',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'row',

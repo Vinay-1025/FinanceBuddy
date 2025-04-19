@@ -1,9 +1,9 @@
-import { ScrollView, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { ScrollView, StyleSheet, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import Header from '../Home/Header';
 import UpiStats from './UpiStats';
 import UpiCard from './UpiCard';
-
+import upiData from '@/constants/UpiData';
 
 const Upi = () => {
     return (
@@ -15,8 +15,15 @@ const Upi = () => {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.scrollContent}
                 >
-                    {Array.from({ length: 12 }).map((_, i) => (
-                        <UpiCard key={i} />
+                    {upiData.map((item) => (
+                        <UpiCard
+                            key={item.id}
+                            name={item.name}
+                            type={item.type}
+                            transactionId={item.transactionId}
+                            amount={item.amount}
+                            date={item.date}
+                        />
                     ))}
                 </ScrollView>
             </View>

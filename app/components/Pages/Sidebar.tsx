@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -13,7 +13,7 @@ import {
     Entypo,
     Feather
 } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, usePathname } from 'expo-router';
 
 type NavItem = {
     key?: string;
@@ -50,7 +50,7 @@ const navItems: NavItem[] = [
     {
         key: 'scheduledPayments',
         label: 'Scheduled Payments',
-        route: 'components/Pages/SPayments/SPayments',
+        route: '/components/Pages/SPayments/SPayments',
         icon: (color) => <Ionicons name="calendar-outline" size={16} color={color} />
     },
     {
@@ -61,19 +61,19 @@ const navItems: NavItem[] = [
     {
         key: 'setGoals',
         label: 'Set Goals',
-        route: 'components/Pages/Goals/Goals',
+        route: '/components/Pages/Goals/Goals',
         icon: (color) => <MaterialCommunityIcons name="target" size={20} color={color} />
     },
     {
         key: 'records',
         label: 'Records',
-        route: 'components/Pages/Records/Records',
+        route: '/components/Pages/Records/Records',
         icon: (color) => <Feather name="file-text" size={18} color={color} />
     },
     {
         key: 'categories',
         label: 'Categories',
-        route : 'components/Pages/Category/Category',
+        route: '/components/Pages/Category/Category',
         icon: (color) => <Ionicons name="list" size={18} color={color} />
     },
     {
@@ -97,7 +97,7 @@ const navItems: NavItem[] = [
     {
         key: 'myProfile',
         label: 'My Profile',
-        route: 'components/Pages/Profile/Profile',
+        route: '/components/Pages/Profile/Profile',
         icon: (color) => <Ionicons name="person-outline" size={16} color={color} />
     },
     {
@@ -131,8 +131,8 @@ const navItems: NavItem[] = [
 ];
 
 const Sidebar: React.FC = () => {
-    const [activeKey, setActiveKey] = useState<string>('dashboard');
     const router = useRouter();
+    const pathname = usePathname();
 
     const handleNavigation = (route?: string) => {
         if (typeof route === 'string') {
@@ -148,16 +148,13 @@ const Sidebar: React.FC = () => {
                         return <View key={`divider-${index}`} style={styles.divider} />;
                     }
 
-                    const isActive = item.key === activeKey;
+                    const isActive = item.route && pathname.includes(item.route);
 
                     return (
                         <TouchableOpacity
                             key={item.key || `item-${index}`}
                             style={[styles.item, isActive && styles.activeItem]}
-                            onPress={() => {
-                                if (item.key) setActiveKey(item.key);
-                                handleNavigation(item.route);
-                            }}
+                            onPress={() => handleNavigation(item.route)}
                         >
                             <View style={styles.icon}>
                                 {item.icon && item.icon(isActive ? '#EE8E46' : 'white')}

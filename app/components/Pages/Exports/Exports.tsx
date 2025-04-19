@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../Home/Header';
 import ExportStats from './ExportStats';
 import ExportCard from './ExportCard';
+import exportsData from '@/constants/ExportsData';
 
 const Exports = () => {
     return (
@@ -10,12 +11,17 @@ const Exports = () => {
             <Header />
             <View style={styles.outercont}>
                 <ExportStats />
-                <ScrollView 
+                <ScrollView
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.scrollContent}
                 >
-                    {Array.from({ length: 18 }).map((_, i) => (
-                        <ExportCard key={i} />
+                    {exportsData.map((item) => (
+                        <ExportCard
+                            key={item.id}
+                            label={item.label}
+                            date={item.date}
+                            title={item.title}
+                        />
                     ))}
                 </ScrollView>
             </View>

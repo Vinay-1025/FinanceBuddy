@@ -1,24 +1,25 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { MaterialIcons } from '@expo/vector-icons'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
-const UpiCard = () => {
+const UpiCard = ({ name, type, transactionId, amount, date }) => {
+    const isInFlow = type === 'InFlow';
+
     return (
         <View style={styles.outercont}>
             <View style={styles.rowcont}>
-                <Text style={{fontSize: 16, fontWeight:600}}>Name</Text>
-                <Text style={{color: '#259040'}}>InFlow</Text>
+                <Text style={{ fontSize: 16, fontWeight: 600 }}>{name}</Text>
+                <Text style={{ color: isInFlow ? '#259040' : '#D12A2A' }}>{type}</Text>
             </View>
-            <Text>Transaction ID : RPUC85746389245</Text>
+            <Text>Transaction ID : {transactionId}</Text>
             <View style={styles.rowcont}>
-                <Text>Amount : ₹ 2,000</Text>
-                <Text>27-12-2024</Text>
+                <Text>Amount : {amount}</Text>
+                <Text>{date}</Text>
             </View>
         </View>
-    )
-}
+    );
+};
 
-export default UpiCard
+export default UpiCard;
 
 const styles = StyleSheet.create({
     outercont: {
@@ -28,11 +29,11 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         borderBottomColor: '#000',
         borderBottomWidth: 0.5,
-        marginBottom: 8
+        marginBottom: 8,
     },
     rowcont: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
-    }
-})
+        alignItems: 'center',
+    },
+});

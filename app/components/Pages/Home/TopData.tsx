@@ -1,10 +1,14 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Dashboardtools from './Dashboardtools';
 import Refundcard from './Refundcard';
+import { useRouter } from 'expo-router';
+import { refundData } from '@/constants/RefundData';
 
 const TopData = () => {
+    const router = useRouter();
+
     return (
         <View style={styles.topdatacont}>
             <Dashboardtools />
@@ -25,9 +29,8 @@ const TopData = () => {
                     </View>
                 </View>
 
-
                 <Text style={styles.maintitle}>Goals</Text>
-                <View style={styles.topdata}>
+                <TouchableOpacity style={styles.topdata} onPress={() => router.push('/components/Pages/Goals/Goals')}>
                     <View style={styles.header}>
                         <Text style={styles.title}>Goal A</Text>
                         <View style={styles.subheader}>
@@ -40,37 +43,35 @@ const TopData = () => {
                         <Text>Target Date : 01-01-2025</Text>
                         <Text style={styles.details}>View Details</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
 
                 <View style={styles.refund}>
                     <View>
                         <Text style={styles.maintitle}>Refund Details</Text>
                         <View style={styles.refundin}>
                             <MaterialIcons name="south" color={'#A02121'} />
-                            <Text style={{color: '#A02121'}}>40 Pending</Text>
+                            <Text style={{ color: '#A02121' }}>40 Pending</Text>
                         </View>
                     </View>
                     <MaterialIcons name="tune" size={24} />
                 </View>
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
-                <Refundcard />
+
+                {refundData.map((item, index) => (
+                    <Refundcard
+                        key={index}
+                        company={item.company}
+                        date={item.date}
+                        pnr={item.pnr}
+                        route={item.route}
+                        amount={item.amount}
+                    />
+                ))}
             </ScrollView>
         </View>
-    )
-}
+    );
+};
 
-export default TopData
+export default TopData;
 
 const styles = StyleSheet.create({
     topdatacont: {

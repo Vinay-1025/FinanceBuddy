@@ -1,8 +1,9 @@
-import { ScrollView, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { ScrollView, StyleSheet, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import Header from '../Home/Header';
 import BillsStat from './BillsStat';
 import BillsCard from './BillsCard';
+import billsData from '@/constants/BillsData';
 
 const Bills = () => {
     return (
@@ -14,8 +15,13 @@ const Bills = () => {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.scrollContent}
                 >
-                    {Array.from({ length: 15 }).map((_, i) => (
-                        <BillsCard key={i} />
+                    {billsData.map((bill) => (
+                        <BillsCard
+                            key={bill.id}
+                            title={bill.title}
+                            note={bill.note}
+                            date={bill.date}
+                        />
                     ))}
                 </ScrollView>
             </View>
